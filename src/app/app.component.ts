@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'cloud-computing-backend';
+  title = 'RSVP Events';
+  
+  onActivate(event) {
+    window.scroll(0,0);
+
+}
 }

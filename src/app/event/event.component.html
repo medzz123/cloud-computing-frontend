@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div class="main-container">
+
+        <div class="form-container">
+            <!-- <img src="assets/login-pic.jpg" width="485px" height="150px"> -->
+            <table width="100%">
+                <tr>
+                    <td >
+                        <input type="text" id="dateInput" #dateInput placeholder="Enter Event Title" />
+                    </td>
+                    <td >
+                        <input class="imageUpload" type="file" />
+                    </td>
+                </tr>
+            </table>
+            <table width="100%">
+                <tr>
+                    <td width = "25%">
+                        <h2 >Date:</h2>
+                    </td>
+                    <td width = "25%">
+                        <input  type="text" id="dateInput" #dateInput placeholder="Enter Date" />
+                    </td>
+
+                </tr>
+                <tr>
+                    <td width = "25%">
+                        <h2 >Location:</h2>
+                    </td>
+                    <td width = "25%">
+                        <input type="text" id="locationInput" #locationInput placeholder="Enter Location"/>
+                    </td>
+                    <td width = "25%">
+                        <button style="margin-top: 0;" (click)="invitePeople()">Invite People</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td width = "25%">
+                        <h2 >Description:</h2>
+                    </td>
+                    <td width = "25%">
+                        <input class="description" id="descriptionInput" #descriptionInput type="text" placeholder="Enter description"/>
+                    </td>
+                    <td width = "25%">
+                        <button  style="margin-top: 0;" (click)="createEvent()">Create Event</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td width = "25%">
+                        <h2 >Number of Invites:</h2>
+                    </td>
+                    <td width = "25%">
+                        <h3 type="text" hint="">0</h3> 
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

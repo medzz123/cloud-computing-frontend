@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    font-family: "kozuka-gothic-pro", sans-serif;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    color: #4a4a4a;
+    overflow-y: scroll; overflow-x:hidden; 
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+}
