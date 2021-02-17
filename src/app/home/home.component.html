@@ -13,8 +13,8 @@
                     <table width="100%">
                         <tr>
                             <td >
-                                <h1>Event Title Here</h1>
-                            </td>
+                                <input *ngIf="this.modifyClicked" type="text" id="dateInput" #dateInput placeholder="{{events.title}}" />
+                                <h1 *ngIf="!this.modifyClicked" type="text" hint="">{{events.title}}</h1>                             </td>
                             <td >
                                 <img src="assets/login-pic.jpg">
                             </td>
@@ -67,7 +67,7 @@
                                 <h2 >Number of Atendees:</h2>
                             </td>
                             <td width = "25%">
-                                <h3 *ngIf="!this.modifyClicked" type="text" hint="">{{events.numberOfAttendees}}</h3> 
+                                <h3 *ngIf="!this.modifyClicked" type="text" hint="">{{events.numberOfAtendees}}</h3> 
                             </td>
 
                         </tr>

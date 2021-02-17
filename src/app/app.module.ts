@@ -23,9 +23,10 @@ import { AccountComponent } from './account/account.component';
     HomeComponent,
     EventComponent,
     PageNotFoundComponent,
-    AccountComponent
+    AccountComponent,
   ],
   imports: [
+    HttpClientModule,
     AppRoutingModule,
     BrowserModule,
     RouterModule.forChild([{ path: "", component: HomeComponent }])

@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  webServerUrl: "https://europe-west1-rsvp-events-9aec5.cloudfunctions.net/main"
 };
 
 /*
