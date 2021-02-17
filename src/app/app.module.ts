@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AccountComponent } from './account/account.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegisterComponent,
     HomeComponent,
     EventComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AccountComponent
   ],
   imports: [
     AppRoutingModule,

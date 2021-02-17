@@ -29,7 +29,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  register(){
+  modifyAccount(){
+    this.router.navigate(["/account"]);
 
   }
 
