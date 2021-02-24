@@ -14,6 +14,10 @@ import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccountComponent } from './account/account.component';
 
+import { AngularFireModule } from '@angular/fire';
+import firebase from 'firebase/app';
+import { FirebaseService } from './services/firebase.service';
+
 
 @NgModule({
   declarations: [
@@ -29,9 +33,18 @@ import { AccountComponent } from './account/account.component';
     HttpClientModule,
     AppRoutingModule,
     BrowserModule,
-    RouterModule.forChild([{ path: "", component: HomeComponent }])
+    AngularFireModule.initializeApp({
+      apiKey: "AIzaSyCYhfQXK1hmDlp6af0JpxrQAKu3y3SzEjc",
+      authDomain: "rsvp-events-9aec5.firebaseapp.com",
+      projectId: "rsvp-events-9aec5",
+      storageBucket: "rsvp-events-9aec5.appspot.com",
+      messagingSenderId: "418546343899",
+      appId: "1:418546343899:web:124dba61181f14052351fe",
+      measurementId: "G-6F5ZNY9FEZ"
+    }),
+    RouterModule.forChild([{ path: "", component: LoginComponent }])
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, FirebaseService]
 })
 export class AppModule { }

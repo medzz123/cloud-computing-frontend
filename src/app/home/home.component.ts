@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { USER_URL, EVENT_URL } from 'src/app/urls';
+import { FirebaseService } from '../services/firebase.service';
 export interface RefElement {
   name: string;
   username: string;
@@ -20,12 +21,15 @@ export interface RefElement {
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private http: HttpClient,
+  constructor(private http: HttpClient,public firebaseService: FirebaseService,
     public router: Router, ) {
       this.http = http;
      }
 
   modifyClicked = false;
+
+  isSignedIn = false;
+
 
   // date = "Some date";
   // location = "Some location";
@@ -45,7 +49,6 @@ export class HomeComponent implements OnInit {
   numberOfAttendees = []
 
   ngOnInit(): void {
-
     this.userEvents = this.http.get<RefElement>(
       USER_URL
     );  
@@ -110,4 +113,19 @@ export class HomeComponent implements OnInit {
     this.modifyClicked = false;
   }
 
+  logOut() {
+    console.log("LOG OUT")
+    this.firebaseService.logout()
+    this.isSignedIn = false;
+    this.router.navigate(["/"]);
+
+    // if(this.firebaseService.isLoggedIn){
+    //   console.log("not happening")
+
+    //   this.isSignedIn = true
+    // }else{
+    //   console.log(" happening")
+    //   this.router.navigate(["/"]);
+    // }
+  }
 }
