@@ -34,12 +34,12 @@ export class EventComponent implements OnInit {
     body = {name:"miri", location:"munich", emails:["miri", "noor", "mahedi"]}
     
     this.createEventRequest = this.http.post<RefElement>(
-      EVENT_URL, body
+      EVENT_URL, body, {headers: {authorization: `Bearer ${localStorage.getItem('token')}`} }
     );
     this.createEventRequest.subscribe((data) => {
       console.log(data)
     });
-    this.router.navigate(["/"]);
+    this.router.navigate(["/home"]);
   }
   invitePeople(){}
 

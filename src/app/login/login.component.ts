@@ -35,9 +35,11 @@ export class LoginComponent implements OnInit {
     var email = this.emailinput.nativeElement.value;
     var pass = this.passwordInput.nativeElement.value;
 
+    
     this.firebaseService.signin(email, pass)
 
     if(this.firebaseService.isLoggedIn){
+
       this.isSignedIn = true
       console.log(name, pass)
       this.router.navigate(["/home"]);

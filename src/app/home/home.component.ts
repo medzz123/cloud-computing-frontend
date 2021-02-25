@@ -10,9 +10,7 @@ export interface RefElement {
   username: string;
   events: object;
   attendees: object;
-
 }
-
 
 @Component({
   selector: 'app-home',
@@ -49,8 +47,9 @@ export class HomeComponent implements OnInit {
   numberOfAttendees = []
 
   ngOnInit(): void {
+
     this.userEvents = this.http.get<RefElement>(
-      USER_URL
+      USER_URL, {headers: {authorization: `Bearer ${localStorage.getItem('token')}`} }
     );  
     this.userEvents.subscribe((data) => {
       console.log("subscription data");
@@ -66,7 +65,7 @@ export class HomeComponent implements OnInit {
     for(let i = 0; i < this.numberOfEventsTemp.length;i ++ ){
       console.log(this.numberOfEventsTemp[i].id)
       this.userEvents = this.http.get<RefElement>(
-        EVENT_URL + "/" + this.numberOfEventsTemp[i].id
+        EVENT_URL + "/" + this.numberOfEventsTemp[i].id, {headers: {authorization: `Bearer ${localStorage.getItem('token')}`} }
       );  
       this.userEvents.subscribe((data) => {
         console.log("subscription data");
