@@ -106,3 +106,13 @@ img{
     border-top-right-radius: 40px; 
         /* border-top-left-radius: 40px; */
 }
+
+.date{
+    outline: none;
+    border-radius: 0;
+    border: none;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    /* background-color: white; */
+}

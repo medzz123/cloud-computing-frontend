@@ -8,7 +8,7 @@
             <table width="100%">
                 <tr>
                     <td >
-                        <input type="text" id="dateInput" #dateInput placeholder="Enter Event Title" />
+                        <input type="text" id="titleInput" #titleInput placeholder="Enter Event Title" />
                     </td>
                     <td >
                         <input class="imageUpload" type="file" />
@@ -21,21 +21,38 @@
                         <h2 >Date:</h2>
                     </td>
                     <td width = "25%">
-                        <input  type="text" id="dateInput" #dateInput placeholder="Enter Date" />
-                    </td>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose a date</mat-label>
+                            <input class="date" matInput [matDatepicker]="picker" (dateInput)="onDate($event)">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker ></mat-datepicker>
 
-                </tr>
-                <tr>
+                          </mat-form-field>
+                    </td>
                     <td width = "25%">
                         <h2 >Location:</h2>
                     </td>
                     <td width = "25%">
                         <input type="text" id="locationInput" #locationInput placeholder="Enter Location"/>
                     </td>
-                    <td width = "25%">
-                        <button style="margin-top: 0;" (click)="invitePeople()">Invite People</button>
-                    </td>
+
                 </tr>
+                <tr>
+                    <td width = "25%">
+                        <h2 >Start Time:</h2>
+                    </td>
+                    <td width = "25%">
+                        <input  type="text" id="startInput" #startInput placeholder="Enter Start Time" />
+                    </td>
+                    <td width = "25%">
+                        <h2 >End Time:</h2>
+                    </td>
+                    <td width = "25%">
+                        <input  type="text" id="endInput" #endInput placeholder="Enter End Time" />
+                    </td>
+
+                </tr>
+
                 <tr>
                     <td width = "25%">
                         <h2 >Description:</h2>
@@ -44,7 +61,7 @@
                         <input class="description" id="descriptionInput" #descriptionInput type="text" placeholder="Enter description"/>
                     </td>
                     <td width = "25%">
-                        <button  style="margin-top: 0;" (click)="createEvent()">Create Event</button>
+                        <button style="margin-top: 0;" (click)="invitePeople()">Invite People</button>
                     </td>
                 </tr>
                 <tr>
@@ -53,6 +70,10 @@
                     </td>
                     <td width = "25%">
                         <h3 type="text" hint="">0</h3> 
+                    </td>
+                    <td></td>
+                    <td width = "25%">
+                        <button  style="margin-top: 0;" (click)="createEvent()">Create Event</button>
                     </td>
 
                 </tr>

@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
 
     
     this.firebaseService.signin(email, pass)
+    console.log(this.firebaseService)
 
     if(this.firebaseService.isLoggedIn){
 

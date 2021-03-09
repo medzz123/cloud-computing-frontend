@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-register',
@@ -8,25 +9,21 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  constructor(public router: Router,  public firebaseService: FirebaseService) { }
   message: string;
-  @ViewChild("nameinput") emailinput: ElementRef;
+  @ViewChild("nameinput") nameinput: ElementRef;
+  @ViewChild("emailinput") emailinput: ElementRef;
   @ViewChild("passinput") passwordInput: ElementRef;
-  @ViewChild("repeatinput") repeatInput: ElementRef;
 
 
   ngOnInit(): void {
   }
 
   register(){
+    let name = this.nameinput.nativeElement.value
+    let email = this.emailinput.nativeElement.value
+    let pass = this.passwordInput.nativeElement.value
 
-    console.log(this.passwordInput.nativeElement.value, this.repeatInput.nativeElement.value)
-    console.log(this.passwordInput.nativeElement.value == this.repeatInput.nativeElement.value)
-      if (this.passwordInput.nativeElement.value == this.repeatInput.nativeElement.value){
-        this.router.navigate(["/login"]);
-      }
-      else{
-        this.message = "Passwords don't match"
-      }
+    this.firebaseService.signup(name,email,pass)
   }
 }

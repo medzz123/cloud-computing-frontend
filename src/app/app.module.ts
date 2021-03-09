@@ -12,11 +12,18 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AccountComponent } from './account/account.component';
+
 
 import { AngularFireModule } from '@angular/fire';
-import firebase from 'firebase/app';
 import { FirebaseService } from './services/firebase.service';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+
+import * as config from 'src/app/firebaseconfig';
+
+import * as firebase from 'firebase';
 
 
 @NgModule({
@@ -27,23 +34,21 @@ import { FirebaseService } from './services/firebase.service';
     HomeComponent,
     EventComponent,
     PageNotFoundComponent,
-    AccountComponent,
+
   ],
   imports: [
+    AngularFireModule.initializeApp(config.CONFIG),
     HttpClientModule,
     AppRoutingModule,
     BrowserModule,
-    AngularFireModule.initializeApp({
-      apiKey: "AIzaSyCYhfQXK1hmDlp6af0JpxrQAKu3y3SzEjc",
-      authDomain: "rsvp-events-9aec5.firebaseapp.com",
-      projectId: "rsvp-events-9aec5",
-      storageBucket: "rsvp-events-9aec5.appspot.com",
-      messagingSenderId: "418546343899",
-      appId: "1:418546343899:web:124dba61181f14052351fe",
-      measurementId: "G-6F5ZNY9FEZ"
-    }),
-    RouterModule.forChild([{ path: "", component: LoginComponent }])
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule, 
+    RouterModule.forChild([{ path: "", component: LoginComponent }]),
+    BrowserAnimationsModule
   ],
+  exports: [ MatFormFieldModule, MatInputModule ],
   providers: [],
   bootstrap: [AppComponent, FirebaseService]
 })

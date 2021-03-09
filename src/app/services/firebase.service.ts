@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
+import { RefElement } from '../home/home.component';
+import { EVENT_URL, CREATE_USER_URL } from '../urls';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,34 +13,40 @@ export class FirebaseService {
 
   isLoggedIn = false;
 
-  constructor(public firebaseAuth : AngularFireAuth) { }
+  createUser: Observable<RefElement>;
+
+  constructor(public firebaseAuth : AngularFireAuth, private http: HttpClient, public router: Router) {this.http = http; }
 
   async signin(email:string , password:string){
-    // await this.firebaseAuth.signInWithEmailAndPassword(email,password).then(res=>{
-    //   this.isLoggedIn = true
-
-    //   console.log(res.user["za"])      
-    //   localStorage.setItem('user', JSON.stringify(res.user))
-    // })
-  try{
+  try {
     const auth = await this.firebaseAuth.signInWithEmailAndPassword(email,password);
     const token = await auth.user.getIdToken();
     localStorage.setItem('token', token)
     this.isLoggedIn = true
 
-    console.log(token)
   } catch (error) {
     console.error(error);
   }
     
   }
 
-  async signup(email:string, password:string){
-    await this.firebaseAuth.createUserWithEmailAndPassword(email, password).then(res=>{
-      this.isLoggedIn = true
-      localStorage.setItem('user', JSON.stringify(res.user))
+  async signup(name:string, email:string, password:string){
+
+    try{
+      let body = {name:name, email:email, password:password}
+    
+      this.createUser = this.http.post<RefElement>(
+        CREATE_USER_URL, body,
+      );
+      this.createUser.subscribe((data) => {
+        this.router.navigate(["/login"]);
+
+        console.log(data)
+      });
+    } catch(error){
+      console.error(error);
       
-    })
+    }
   }
 
   logout(){

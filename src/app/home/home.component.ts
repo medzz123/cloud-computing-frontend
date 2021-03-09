@@ -94,11 +94,6 @@ export class HomeComponent implements OnInit {
 
   }
 
-  modifyAccount(){
-    this.router.navigate(["/account"]);
-
-  }
-
   createEvent(){
     this.router.navigate(["/event"]);
 

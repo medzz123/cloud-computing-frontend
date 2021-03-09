@@ -4,22 +4,46 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { EventComponent } from './event/event.component';
-import { AccountComponent } from './account/account.component';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from './service/auth-guard.service';
 
 const routes: Routes = [
   
-  { path: "", component: LoginComponent },
-  { path: "home", component: HomeComponent },
-  { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
-  { path: "event", component: EventComponent },
-  { path: "account", component: AccountComponent },
+  { path: "login",
+   component: LoginComponent,
+  },
 
+  { path: "",
+   redirectTo: "login",
+   pathMatch: "full" ,
+  },
+  
 
-  { path: "page-not-found", component: PageNotFoundComponent },
-  { path: "**", redirectTo: "page-not-found", pathMatch: "full" }];
+  { path: "home", 
+  component: HomeComponent, 
+  canActivate:[AuthGuard] 
+  },
+  { path: "login",
+   component: LoginComponent,
+   canActivate:[AuthGuard] 
+  },
+  { path: "register",
+   component: RegisterComponent,
+   canActivate:[AuthGuard] 
+  },
+  { path: "event",
+   component: EventComponent,
+   canActivate:[AuthGuard] 
+  },
+
+  { path: "page-not-found",
+   component: PageNotFoundComponent,
+  },
+  { path: "**",
+   redirectTo: "page-not-found",
+   pathMatch: "full" ,
+  }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes,
