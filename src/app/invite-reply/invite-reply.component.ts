@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { USER_URL, EVENT_URL } from 'src/app/urls';
+import { GET_REPLY_URL, EVENT_URL, REPLY_URL } from 'src/app/urls';
 import { Observable } from 'rxjs';
 import { RefElement } from '../home/home.component';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-invite-reply',
@@ -12,35 +13,81 @@ import { Router } from '@angular/router';
 })
 export class InviteReplyComponent implements OnInit {
 
-  constructor(private router: Router, private http: HttpClient) {this.http = http; }
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {this.http = http; }
   userEvents: Observable<RefElement>;
-  eventId;
-  eventDetails = []
+  reply: Observable<RefElement>;
+
+  eventDetails = [];
+
+  id: string;
+  event: string;
+  token: string;
 
   ngOnInit(): void {
+
+    this.id = this.route.snapshot.queryParamMap.get('id');
+    this.event  = this.route.snapshot.queryParamMap.get('event');
+    this.token = this.route.snapshot.queryParamMap.get('token');
+
+    let params = new HttpParams()
+    .set('id', this.id)
+    .set('event', this.event)
+    .set('token', this.token);
+
     this.userEvents = this.http.get<RefElement>(
-      USER_URL, {headers: {authorization: `Bearer ${localStorage.getItem('token')}`} }
+      GET_REPLY_URL, {params}
     );  
     this.userEvents.subscribe((data) => {
       console.log("subscription data");
 
-      this.eventId = this.router.url.split("invite-reply/")[1]
+      console.log(data)
 
-      console.log(this.eventId)
+      this.eventDetails.push(data)
 
-      for (let i = 0; i< Object.keys(data.events).length; i++){
-        if(data.events[i]["id"] == this.eventId){
-          this.eventDetails.push({title: data.events[i]["title"], date: data.events[i]["date"], startTime: data.events[i]["startTime"], endTime: data.events[i]["endTime"], location: data.events[i]["location"], description: "description"})
-          console.log(data.events[i])
-        }
-      }
+      // for (let i = 0; i< Object.keys(data.events).length; i++){
+      //   if(data.events[i]["id"] == this.eventId){
+      //     this.eventDetails.push({title: data.events[i]["title"], date: data.events[i]["date"], startTime: data.events[i]["startTime"], endTime: data.events[i]["endTime"], location: data.events[i]["location"], description: "description"})
+      //     console.log(data.events[i])
+      //   }
+      // }
       console.log(this.eventDetails)
 
     });
+
   }
 
   attend(){
+    let body = {id: this.id, event: this.event, token : this.token, attending : true}
+
+    try {
+      this.reply = this.http.post<RefElement>(
+        REPLY_URL, body,
+      );
+  
+      this.reply.subscribe((data) => {
+        console.log(data)
+      });
+
+    } catch(error){
+      console.log(error)
+    }
+
 
   }
-  notAttend(){}
+  notAttend(){
+    let body = {id: this.id, event: this.event, token : this.token, attending : false}
+
+    try {
+      this.reply = this.http.post<RefElement>(
+        REPLY_URL, body,
+      );
+  
+      this.reply.subscribe((data) => {
+        console.log(data)
+      });
+
+    } catch(error){
+      console.log(error)
+    }
+  }
 }

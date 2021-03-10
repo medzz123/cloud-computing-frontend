@@ -37,9 +37,9 @@ const routes: Routes = [
    component: EventComponent,
    canActivate:[AuthGuard] 
   },
-  { path: "invite-reply/:id",
+  { path: "invite-reply",
   component: InviteReplyComponent,
-  canActivate:[AuthGuard] 
+  // canActivate:[AuthGuard] 
  },
 
   { path: "page-not-found",

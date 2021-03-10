@@ -106,6 +106,7 @@ export class EventComponent implements OnInit {
       console.log(data)
     });
     this.router.navigate(["/home"]);
+    
   }
   invitePeople(){}
 
