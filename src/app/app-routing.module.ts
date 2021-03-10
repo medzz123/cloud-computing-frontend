@@ -7,6 +7,7 @@ import { EventComponent } from './event/event.component';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './service/auth-guard.service';
+import { InviteReplyComponent } from './invite-reply/invite-reply.component';
 
 const routes: Routes = [
   
@@ -36,6 +37,10 @@ const routes: Routes = [
    component: EventComponent,
    canActivate:[AuthGuard] 
   },
+  { path: "invite-reply/:id",
+  component: InviteReplyComponent,
+  canActivate:[AuthGuard] 
+ },
 
   { path: "page-not-found",
    component: PageNotFoundComponent,

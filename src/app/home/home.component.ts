@@ -24,8 +24,6 @@ export class HomeComponent implements OnInit {
       this.http = http;
      }
 
-  modifyClicked = false;
-
   isSignedIn = false;
 
 
@@ -58,10 +56,9 @@ export class HomeComponent implements OnInit {
       for (var key in data.events) {
         // check if the property/key is defined in the object itself, not in parent
         if (data.events.hasOwnProperty(key)) {     
-            this.numberOfEventsTemp.push({"title": data.events[key]["title"], "date": data.events[key]["date"] , "location": data.events[key]["location"] , "description": data.events[key]["description"], "id": data.events[key]["id"]})
+            this.numberOfEventsTemp.push({"title": data.events[key]["title"], "date": data.events[key]["date"] , "startTime": data.events[key]["startTime"], "endTime": data.events[key]["endTime"],  "location": data.events[key]["location"] , "description": data.events[key]["description"], "id": data.events[key]["id"]})
         }
     }
-
     for(let i = 0; i < this.numberOfEventsTemp.length;i ++ ){
       console.log(this.numberOfEventsTemp[i].id)
       this.userEvents = this.http.get<RefElement>(
@@ -82,7 +79,7 @@ export class HomeComponent implements OnInit {
           }
         }
         // console.log(this.countAttendees, this.numberOfEventsTemp[i].id)
-        this.numberOfEvents.push({"title": this.numberOfEventsTemp[i].title, "date": this.numberOfEventsTemp[i].date , "location": this.numberOfEventsTemp[i].location , "description": this.numberOfEventsTemp[i].description,  "numberOfAtendees": this.countAttendees})
+        this.numberOfEvents.push({"title": this.numberOfEventsTemp[i].title, "date": this.numberOfEventsTemp[i].date , "startTime": this.numberOfEventsTemp[i].startTime, "endTime": this.numberOfEventsTemp[i].endTime, "location": this.numberOfEventsTemp[i].location , "description": this.numberOfEventsTemp[i].description,  "numberOfAtendees": this.countAttendees})
 
       });
       console.log( this.numberOfEvents)
@@ -97,14 +94,6 @@ export class HomeComponent implements OnInit {
   createEvent(){
     this.router.navigate(["/event"]);
 
-  }
-
-  modifyEvent(){
-    this.modifyClicked = true;
-  }
-  
-  doneModifying(){
-    this.modifyClicked = false;
   }
 
   logOut() {

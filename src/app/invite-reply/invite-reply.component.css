@@ -11,8 +11,9 @@
 
 }
 .form-container {
+    margin-top: 50px ;
     width: 800px;
-    height: 650px;
+    height: 500px;
     background: #ffffff;
     margin-left: auto;
     margin-right: auto;
@@ -60,7 +61,6 @@ button {
     border: solid 2px #eecda2;
     color: #eecda2;
     font-size: 15px;
-    margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -96,30 +96,5 @@ img{
     float:right;
     border-top-right-radius: 40px; 
         /* border-top-left-radius: 40px; */
-}
 
-.imageUpload{
-    width: 400px ;
-    height: 150px;
-    margin-left: 50px;
-    float:right;
-    border-top-right-radius: 40px; 
-        /* border-top-left-radius: 40px; */
-}
-
-.date{
-    outline: none;
-    border-radius: 0;
-    border: none;
-}
-
-.emails{
-    width: 100%;
-    outline: none;
-    border-radius: 0;
-    border: none;
-}
-
-.example-chip-list {
-    width: 590px;
 }

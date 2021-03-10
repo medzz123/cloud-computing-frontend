@@ -20,10 +20,12 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatChipsModule} from '@angular/material/chips';
 
 import * as config from 'src/app/firebaseconfig';
 
 import * as firebase from 'firebase';
+import { InviteReplyComponent } from './invite-reply/invite-reply.component';
 
 
 @NgModule({
@@ -34,6 +36,7 @@ import * as firebase from 'firebase';
     HomeComponent,
     EventComponent,
     PageNotFoundComponent,
+    InviteReplyComponent,
 
   ],
   imports: [
@@ -45,6 +48,7 @@ import * as firebase from 'firebase';
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule, 
+    MatChipsModule,
     RouterModule.forChild([{ path: "", component: LoginComponent }]),
     BrowserAnimationsModule
   ],

@@ -3,12 +3,8 @@
 <body>
     <div class="main-container">
         <table width = "100%">
-            <td width = "25%">
-                <button (click)="createEvent()">Create Event</button>
-                <button (click)="logOut()">Log Out</button>
-            </td>
             <td width = "75%">
-                <div *ngFor="let events of numberOfEvents" class="form-container">
+                <div *ngFor="let events of eventDetails" class="form-container">
                     <table width="100%">
                         <tr>
                             <td >
@@ -72,15 +68,21 @@
 
                         </tr>
                     </table>
-                    <table>
+                    <table width = "100%">
                         <tr>
-                            <td width = "25%" style="left: 300px;">
-                                <button style="margin-top: 0;" (click)="viewAtendees()">View Attendees</button>
-                            </td> 
+                            <td>
+                                <h1>Attend?</h1>
+                            </td>
                         </tr>
+                    </table>
+                    <table  width = "100%">
+
                         <tr>
-                            <td width = "25%" style="left: 300px;">
-                                <button style="margin-top: 100;" (click)="invitePeople()">Invite People</button>
+                            <td  width = "50%">
+                                <button style="margin-top: 0;" (click)="attend()">YES</button>
+                            </td> 
+                            <td  width = "50%">
+                                <button style="margin-top: 100;" (click)="notAttend()">NO</button>
                             </td> 
                         </tr>
 
