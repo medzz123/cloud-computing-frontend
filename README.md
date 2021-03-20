@@ -1,4 +1,4 @@
-# CloudComputingFrontend
+# Cloud Computing Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.6.
 
@@ -10,7 +10,7 @@ To run the development server:
 ng serve
 ```
 
-Open [http://localhost:4200] (http://localhost:4200) with your browser to see the result.
+Open http://localhost:4200 with your browser to see the result.
 
 ## Deployment
 
@@ -20,5 +20,5 @@ To deploy run:
 git push origin master
 ```
 
-Open [http://gallant-noyce-b641f8.netlify.app/] (http://gallant-noyce-b641f8.netlify.app/) with your browser to see the result.
+Open http://gallant-noyce-b641f8.netlify.app/ with your browser to see the result.
 
