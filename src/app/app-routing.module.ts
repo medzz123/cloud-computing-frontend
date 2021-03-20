@@ -19,27 +19,24 @@ const routes: Routes = [
    redirectTo: "login",
    pathMatch: "full" ,
   },
+  { path: "login",
+  component: LoginComponent,
+ },
+ { path: "register",
+  component: RegisterComponent,
+ },
   
-
   { path: "home", 
   component: HomeComponent, 
   canActivate:[AuthGuard] 
   },
-  { path: "login",
-   component: LoginComponent,
-   canActivate:[AuthGuard] 
-  },
-  { path: "register",
-   component: RegisterComponent,
-   canActivate:[AuthGuard] 
-  },
+
   { path: "event",
    component: EventComponent,
    canActivate:[AuthGuard] 
   },
   { path: "invite-reply",
   component: InviteReplyComponent,
-  // canActivate:[AuthGuard] 
  },
 
   { path: "page-not-found",
