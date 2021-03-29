@@ -1,56 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { EventComponent } from './event/event.component';
-
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AuthGuard } from './service/auth-guard.service';
-import { InviteReplyComponent } from './invite-reply/invite-reply.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { AuthGuard } from './user/auth.guard';
 
 const routes: Routes = [
-  
-  { path: "login",
-   component: LoginComponent,
+  { path: '', component: HomePageComponent },
+  {
+    path: 'login',
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
   },
-
-  { path: "",
-   redirectTo: "login",
-   pathMatch: "full" ,
+  {
+    path: 'customers',
+    loadChildren: () =>
+      import('./customers/customers.module').then((m) => m.CustomersModule),
+    canActivate: [AuthGuard],
   },
-  { path: "login",
-  component: LoginComponent,
- },
- { path: "register",
-  component: RegisterComponent,
- },
-  
-  { path: "home", 
-  component: HomeComponent, 
-  canActivate:[AuthGuard] 
-  },
-
-  { path: "event",
-   component: EventComponent,
-   canActivate:[AuthGuard] 
-  },
-  { path: "invite-reply",
-  component: InviteReplyComponent,
- },
-
-  { path: "page-not-found",
-   component: PageNotFoundComponent,
-  },
-  { path: "**",
-   redirectTo: "page-not-found",
-   pathMatch: "full" ,
-  }];
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,
-  {scrollPositionRestoration: 'enabled'})
-],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      initialNavigation: 'enabled',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

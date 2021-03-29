@@ -17,8 +17,7 @@ Open http://localhost:4200 with your browser to see the result.
 To deploy run:
 
 ```bash
-git push origin master
+git push origin main
 ```
 
-Open http://gallant-noyce-b641f8.netlify.app/ with your browser to see the result.
-
+Open rsvpevents.uk with your browser to see the result.

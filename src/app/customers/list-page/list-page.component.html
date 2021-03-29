@@ -1,0 +1,12 @@
+<h1>Your Events!</h1>
+
+<mat-nav-list role="list">
+  <mat-list-item *ngFor="let event of events" role="listitem">
+    <p>{{ event.title }}</p>
+    <p>{{ event.name }}</p>
+    <p>{{ event.location }}</p>
+    <p>{{ event.date }}</p>
+    <p>{{ event.startTime }}</p>
+    <p>{{ event.endTime }}</p>
+  </mat-list-item>
+</mat-nav-list>
