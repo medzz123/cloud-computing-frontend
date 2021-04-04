@@ -30,16 +30,8 @@
       <div *ngIf="!(isHandset$ | async)">
         <a mat-button routerLink="/customers">⚡ Home</a>
 
-        <a mat-button routerLink="/login" *ngIf="!(afAuth.authState | async)"
-          >🔑 Login</a
-        >
-        <a
-          mat-button
-          routerLink="/login"
-          *ngIf="afAuth.authState | async as user"
-        >
-          Logout
-        </a>
+        <a mat-button routerLink="/login" *ngIf="!(afAuth.authState | async)">🔑 Login</a>
+        <a mat-button routerLink="/login" *ngIf="afAuth.authState | async as user">Logout</a>
       </div>
     </mat-toolbar>
 
