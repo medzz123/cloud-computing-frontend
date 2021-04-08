@@ -1,0 +1,106 @@
+<html>
+<body>
+    <div class="main-container">
+
+        <div class="form-container">
+            <!-- <img src="assets/login-pic.jpg" width="485px" height="150px"> -->
+            <table width="100%">
+                <tr>
+                    <td >
+                        <input type="text" id="titleInput" #titleInput placeholder="Enter Event Title" />
+                    </td>
+                    <td >
+                        <input class="imageUpload" type="file" />
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="top:20px " >
+                <tr>
+                    <td width = "25%">
+                        <h2 >Date:</h2>
+                    </td>
+                    <td width = "25%">
+                        <mat-form-field >
+                            <mat-label>Choose a date</mat-label>
+                            <input class="date" matInput [matDatepicker]="picker" (dateInput)="onDate($event)">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker ></mat-datepicker>
+
+                          </mat-form-field>
+                    </td>
+                    <td width = "25%">
+                        <h2 >Location:</h2>
+                    </td>
+                    <td width = "25%">
+                        <input type="text" id="locationInput" #locationInput placeholder="Enter Location"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td width = "25%">
+                        <h2 >Start Time:</h2>
+                    </td>
+                    <td width = "25%">
+                        <input type="time" id="startInput" #startInput placeholder="Enter Start Time" />
+                    </td>
+                    <td width = "25%">
+                        <h2 >End Time:</h2>
+                    </td>
+                    <td width = "25%">
+                        <input type="time" id="endInput" #endInput placeholder="Enter End Time" />
+                    </td>
+
+                </tr>
+            </table>
+            <table  width="100%" style="top:30px;">
+                <tr>
+                    <td  width="25%">
+                        <h2 >Description:</h2>
+                    </td>
+                    <td width = "75%">
+                        <textarea class="description" id="descriptionInput" #descriptionInput type="text" placeholder="Enter description"></textarea>
+                    </td>
+                </tr>
+                <tr style="top:20px">
+                    <td width = "25%">
+                        <h2 >Invite People:</h2>
+                    </td>
+                    <td width = "75%">
+                        <mat-form-field class="example-chip-list" width="100%">
+                            <mat-label></mat-label>
+                            <mat-chip-list #chipList aria-label="emails"  width="100%">
+                                <mat-chip  width="100%" *ngFor="let email of emails" [selectable]="selectable"
+                                         [removable]="removable" (removed)="remove(email)">
+                                  {{email.name}}
+                                  <mat-icon matChipRemove *ngIf="removable">x</mat-icon>
+                                </mat-chip>
+                                <input  width="100%" class="emails" placeholder="New email..."
+                                       [matChipInputFor]="chipList"
+                                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                       [matChipInputAddOnBlur]="addOnBlur"
+                                       (matChipInputTokenEnd)="add($event)">
+                              </mat-chip-list>
+                          </mat-form-field>  
+                     </td>
+                </tr>
+                <tr>
+                    <td width = "25%">
+                        <h2 >Number of Invites:</h2>
+                    </td>
+                    <td width = "25%">
+                        <h3 type="text" hint="">{{emails.length}}</h3> 
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="top:20px">
+                <tr>
+                    <td width = "100%" style="text-align: center;">
+                        <button  style="margin-top: 0;" (click)="createEvent()">Create Event</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

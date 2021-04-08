@@ -5,6 +5,10 @@ import { CustomersRoutingModule } from './customers-routing.module';
 import { ListPageComponent } from './list-page/list-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+
 
 @NgModule({
   declarations: [ListPageComponent],
@@ -13,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     CustomersRoutingModule,
     HttpClientModule,
+
   ],
 })
 export class CustomersModule {}

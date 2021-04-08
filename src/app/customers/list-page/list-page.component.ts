@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
@@ -28,6 +28,20 @@ export class ListPageComponent implements OnInit {
   events = [];
   subscription;
 
+  @ViewChild("titleInput") titleInput: ElementRef;
+  @ViewChild("locationInput") locationInput: ElementRef;
+  @ViewChild("startInput") startInput: ElementRef;
+  @ViewChild("endInput") endInput: ElementRef;
+  @ViewChild("descriptionInput") descriptionInput: ElementRef;
+
+  dateInput;
+  date = new Date();
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  invites = [];
+
   ngOnInit(): void {
 
     this.subscription = this.http.get<Res>(`${environment.webServerUrl}/user`, {
@@ -46,8 +60,8 @@ export class ListPageComponent implements OnInit {
     this.events = [];
   }
 
-  openDialog(attendees): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+  viewAttendees(): void {
+    const dialogRef = this.dialog.open(ViewAttendeesDialog, {
       width: '500px',
       height: '400px',
       data: {attendees: this.events}
@@ -55,7 +69,19 @@ export class ListPageComponent implements OnInit {
     console.log(this.events[0]['attendees'][0]['email'])
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(attendees)
+      console.log('The dialog was closed');
+    });
+  }
+
+  createEvent(): void {
+    const dialogRef = this.dialog.open(CreateEventDialog, {
+      width: '500px',
+      height: '400px',
+      data: {attendees: this.events}
+    });
+    console.log(this.events[0]['attendees'][0]['email'])
+
+    dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
   }
@@ -65,15 +91,32 @@ export class ListPageComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: './dialog-overview-example-dialog.html',
+  selector: 'view-attendees-dialog',
+  templateUrl: './view-attendees-dialog.html',
   styleUrls: ["./list-page.component.scss"],
 })
 
-export class DialogOverviewExampleDialog {
+export class ViewAttendeesDialog {
 
   constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    public dialogRef: MatDialogRef<ViewAttendeesDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'create-event-dialog',
+  templateUrl: './create-event-dialog.html',
+  styleUrls: ["./list-page.component.scss"],
+})
+
+export class CreateEventDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<CreateEventDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onNoClick(): void {

@@ -15,6 +15,11 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent],
@@ -28,8 +33,16 @@ import { MatDialogModule } from '@angular/material/dialog';
     AngularFirestoreModule,
     AngularFireAuthModule,
     MatDialogModule, 
+    BrowserModule, 
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule, 
+    MatChipsModule,
     
   ],
+
+  exports : [MatFormFieldModule, MatInputModule],
   providers: [],
   bootstrap: [AppComponent],
 })
