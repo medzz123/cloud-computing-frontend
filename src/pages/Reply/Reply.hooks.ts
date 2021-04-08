@@ -1,9 +1,11 @@
 import { unauthenticatedFetch } from '@lib/fetch';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
 export const useReply = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const router = useRouter();
 
   const handler = useCallback((input) => {
     setLoading(input);
@@ -12,8 +14,6 @@ export const useReply = () => {
   const [state, setState] = useState(undefined);
   useEffect(() => {
     const getEvents = async () => {
-      setLoading(true);
-
       const params = router.query;
 
       const response = await unauthenticatedFetch({
@@ -27,8 +27,10 @@ export const useReply = () => {
       setLoading(false);
     };
 
-    getEvents();
-  }, []);
+    if (router.isReady) {
+      getEvents();
+    }
+  }, [router.isReady]);
 
   return { state, loading, handler };
 };

@@ -60,7 +60,12 @@ const Reply: NextPage = () => {
               <Typography align="center">
                 Confirm attendance your attendance
               </Typography>
-              <Box display="flex" justifyContent="space-evenly" padding="20px">
+              <Box
+                display="flex"
+                justifyContent="space-evenly"
+                padding="20px"
+                width="100%"
+              >
                 <Button
                   type="button"
                   variant="contained"
