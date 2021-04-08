@@ -1,12 +1,11 @@
+import { logout } from '@lib/logout';
 import {
   AppBar,
-  Box,
   IconButton,
+  Link as MaterialLink,
   Toolbar,
-  Typography,
 } from '@material-ui/core';
 import { Create, EventAvailable, ExitToApp, Home } from '@material-ui/icons';
-import firebase from 'firebase/app';
 import Link from 'next/link';
 import * as React from 'react';
 
@@ -29,13 +28,11 @@ const Layout: React.FunctionComponent<LayoutProps> = (props) => {
       <div className={classes.grow}>
         <AppBar position="static">
           <Toolbar>
-            <EventAvailable />
-
-            <Box marginLeft="20px">
-              <Typography className={classes.title} variant="h6" noWrap>
+            <Link href="/">
+              <MaterialLink className={classes.materialLink}>
                 RSVP Events
-              </Typography>
-            </Box>
+              </MaterialLink>
+            </Link>
 
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
@@ -57,12 +54,7 @@ const Layout: React.FunctionComponent<LayoutProps> = (props) => {
                   <Create />
                 </IconButton>
               </Link>
-              <IconButton
-                aria-label="account of current user"
-                onClick={() => {
-                  firebase.auth().signOut();
-                }}
-              >
+              <IconButton aria-label="account of current user" onClick={logout}>
                 <ExitToApp color="error" />
               </IconButton>
             </div>

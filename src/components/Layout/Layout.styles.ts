@@ -4,6 +4,15 @@ export const useLayoutStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
+  materialLink: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    '&:hover': {
+      textDecoration: 'none',
+    },
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },

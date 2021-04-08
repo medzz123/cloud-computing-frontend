@@ -1,5 +1,6 @@
 import FormikTextInput from '@components/FormikTextInput';
 import { authenticatedFetch } from '@lib/fetch';
+import { logout } from '@lib/logout';
 import { Button, Card, CardContent, Typography } from '@material-ui/core';
 import { Form, Formik } from 'formik';
 import { NextPage } from 'next';
@@ -39,9 +40,17 @@ const Create: NextPage = () => {
           try {
             await authenticatedFetch({ url: '/event', method: 'POST', body });
 
+            toast.success('New Event created!');
             router.push('/');
           } catch (error) {
-            toast.error('Something went wrong, please try again ', error);
+            if (JSON.stringify(error)?.includes('401')) {
+              toast.error(
+                'Your session expired, you will be logged out shortly, please login again.'
+              );
+              logout();
+            } else {
+              toast.error('Something went wrong, please try again ', error);
+            }
           }
         }}
         validate={createValidate}

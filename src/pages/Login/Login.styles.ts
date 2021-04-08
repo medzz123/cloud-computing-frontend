@@ -32,4 +32,17 @@ export const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  modal: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: `2px solid ${theme.palette.primary.main}`,
+    boxShadow: theme.shadows[5],
+    outline: 'none',
+    padding: theme.spacing(2, 4, 3),
+    top: '50%',
+    left: '50%',
+    transform: `translate(-50%, -50%)`,
+    borderRadius: '10px',
+  },
 }));
