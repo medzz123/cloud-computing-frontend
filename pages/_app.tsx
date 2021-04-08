@@ -45,7 +45,10 @@ const App = ({ Component, pageProps, router }) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
+        <ToastContainer
+          position={toast.POSITION.BOTTOM_RIGHT}
+          autoClose={2000}
+        />
         <Layout currentRoute={router.route}>
           <Component {...pageProps} />
         </Layout>

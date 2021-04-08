@@ -16,8 +16,8 @@ const FormikTextInput: React.FunctionComponent<FormikInputProps> = (props) => {
   return (
     // @ts-ignore
     <TextField
-      {...props}
       className={classes.input}
+      autoComplete="off"
       error={error}
       onChange={(e) => {
         helpers.setValue(e.target.value);
@@ -28,6 +28,7 @@ const FormikTextInput: React.FunctionComponent<FormikInputProps> = (props) => {
       value={field.value}
       helperText={error ? meta.error : ' '}
       fullWidth={true}
+      {...props}
     />
   );
 };

@@ -1,3 +1,4 @@
+import { getRandomIntInclusive } from '@lib/getRandomIntInclusive';
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
@@ -5,13 +6,13 @@ export const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage: `url(/assets/party-${getRandomIntInclusive(1, 6)}.svg)`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light'
         ? theme.palette.grey[50]
         : theme.palette.grey[900],
-    backgroundSize: 'cover',
+    backgroundSize: 'contain',
     backgroundPosition: 'center',
   },
   paper: {

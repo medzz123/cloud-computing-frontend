@@ -15,7 +15,17 @@ import { EventCardProps } from './EventCard.models';
 import { useEventCardStyles } from './EventCard.styles';
 
 const EventCard: React.FunctionComponent<EventCardProps> = (props) => {
-  const { image, title, name, location, date, start, end, guests } = props;
+  const {
+    image,
+    title,
+    name,
+    location,
+    date,
+    start,
+    end,
+    guests,
+    customComponent,
+  } = props;
   const classes = useEventCardStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -50,42 +60,49 @@ const EventCard: React.FunctionComponent<EventCardProps> = (props) => {
           Ends At: {end}
         </Typography>
 
-        <Box height="20px" />
-        <Button
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          className={classes.buttonCenter}
-          aria-label="show more"
-          variant="outlined"
-        >
-          View guests
-          <ExpandMore
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded,
-            })}
-          />
-        </Button>
+        {guests && (
+          <Box marginTop="20px">
+            <Button
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              className={classes.buttonCenter}
+              aria-label="show more"
+              variant="outlined"
+            >
+              View guests
+              <ExpandMore
+                className={clsx(classes.expand, {
+                  [classes.expandOpen]: expanded,
+                })}
+              />
+            </Button>
+          </Box>
+        )}
       </CardContent>
 
-      <Collapse in={expanded} timeout="auto" unmountOnExit={true}>
-        <CardContent>
-          <Typography paragraph>
-            You have 6 guests coming to your event.
-          </Typography>
-          {guests.map((guest) => (
-            <Box
-              key={guest.email}
-              display="flex"
-              justifyContent="space-between"
-              marginBottom="20px"
-            >
-              <Typography paragraph>{guest.email}</Typography>
-              <Typography paragraph>Replied: {guest.replied}</Typography>
-              <Typography paragraph>Attending: {guest.attending}</Typography>
-            </Box>
-          ))}
-        </CardContent>
-      </Collapse>
+      {guests && (
+        <Collapse in={expanded} timeout="auto" unmountOnExit={true}>
+          <CardContent>
+            <Typography paragraph>
+              You have 6 guests coming to your event.
+            </Typography>
+            {guests.map((guest) => (
+              <Box
+                key={guest.email}
+                display="flex"
+                justifyContent="space-between"
+                marginBottom="20px"
+              >
+                <Typography paragraph>{guest.email}</Typography>
+                <Typography paragraph>Replied: {guest.replied}</Typography>
+                <Typography paragraph>Attending: {guest.attending}</Typography>
+              </Box>
+            ))}
+          </CardContent>
+        </Collapse>
+      )}
+
+      {customComponent}
     </Card>
   );
 };

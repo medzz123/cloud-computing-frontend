@@ -10,10 +10,10 @@ export const useHomeHooks = () => {
 
       const response = await authenticatedFetch({ url: '/user' });
 
-      setLoading(false);
-      if (response) {
+      if (response.data) {
         setState(response.data.events);
       }
+      setLoading(false);
     };
 
     getEvents();

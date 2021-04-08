@@ -6,9 +6,10 @@ export interface EventCardProps {
   date: string;
   start: string;
   end: string;
-  guests: {
+  guests?: {
     email: string;
     attending: boolean;
     replied: boolean;
   }[];
+  customComponent?: React.ReactNode;
 }

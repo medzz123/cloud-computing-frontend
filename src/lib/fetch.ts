@@ -37,3 +37,27 @@ export const authenticatedFetch = async ({
 
   return response;
 };
+
+export const unauthenticatedFetch = async ({
+  url,
+  body,
+  method = 'GET',
+}: {
+  url: string;
+  method?: 'GET' | 'POST';
+  body?: unknown;
+}) => {
+  toast.dismiss();
+  let response = undefined;
+  try {
+    response = await axios.request({
+      url: baseUrl + url,
+      method,
+      data: body,
+    });
+  } catch (error) {
+    toast.error('Something went wrong: ', error);
+  }
+
+  return response;
+};

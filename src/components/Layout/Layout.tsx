@@ -39,7 +39,7 @@ const Layout: React.FunctionComponent<LayoutProps> = (props) => {
 
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <Link href="/create">
+              <Link href="/">
                 <IconButton
                   type="button"
                   aria-label="account of current user"
