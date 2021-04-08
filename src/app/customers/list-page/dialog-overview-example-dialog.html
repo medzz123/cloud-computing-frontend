@@ -1,0 +1,15 @@
+<div *ngFor = 'let event of events'>
+    <h1>&#9989;</h1>
+    <h1 mat-dialog-title>People Invited</h1>
+    <div mat-dialog-content >
+        <table>
+            <tr>
+                <h1 >{{data.attendees}}</h1>
+            </tr>
+        </table>
+    </div>
+    <div mat-dialog-actions>
+        <button (click)="onNoClick()">OK</button>
+    </div>
+</div>
+
