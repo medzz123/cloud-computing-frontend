@@ -1,3 +1,4 @@
+import { readableBoolean } from '@lib/readableBoolean';
 import {
   Box,
   Button,
@@ -7,7 +8,7 @@ import {
   Collapse,
   Typography,
 } from '@material-ui/core';
-import { ExpandMore } from '@material-ui/icons';
+import { Cancel, CheckCircle, ExpandMore } from '@material-ui/icons';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -28,6 +29,8 @@ const EventCard: React.FunctionComponent<EventCardProps> = (props) => {
   } = props;
   const classes = useEventCardStyles();
   const [expanded, setExpanded] = React.useState(false);
+
+  console.log('GUest', guests);
 
   const handleExpandClick = () => {
     setExpanded((e) => !e);
@@ -84,7 +87,8 @@ const EventCard: React.FunctionComponent<EventCardProps> = (props) => {
         <Collapse in={expanded} timeout="auto" unmountOnExit={true}>
           <CardContent>
             <Typography paragraph>
-              You have 6 guests coming to your event.
+              You have {guests.filter((g) => g.attending).length} guests coming
+              to your event.
             </Typography>
             {guests.map((guest) => (
               <Box
@@ -92,10 +96,51 @@ const EventCard: React.FunctionComponent<EventCardProps> = (props) => {
                 display="flex"
                 justifyContent="space-between"
                 marginBottom="20px"
+                flexWrap="wrap"
               >
-                <Typography paragraph>{guest.email}</Typography>
-                <Typography paragraph>Replied: {guest.replied}</Typography>
-                <Typography paragraph>Attending: {guest.attending}</Typography>
+                <Box width="300px">
+                  <Typography paragraph>{guest.email}</Typography>
+                </Box>
+
+                <Box display="flex">
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    marginRight="8px"
+                  >
+                    <Typography
+                      variant="caption"
+                      color="textSecondary"
+                      component="span"
+                    >
+                      Replied
+                    </Typography>
+                    {guest.replied ? (
+                      <CheckCircle color="primary" />
+                    ) : (
+                      <Cancel color="error" />
+                    )}
+                  </Box>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <Typography
+                      variant="caption"
+                      color="textSecondary"
+                      component="span"
+                    >
+                      Attending
+                    </Typography>
+                    {guest.attending ? (
+                      <CheckCircle color="primary" />
+                    ) : (
+                      <Cancel color="error" />
+                    )}
+                  </Box>
+                </Box>
               </Box>
             ))}
           </CardContent>
