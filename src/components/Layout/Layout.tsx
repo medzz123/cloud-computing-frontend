@@ -5,7 +5,7 @@ import {
   Link as MaterialLink,
   Toolbar,
 } from '@material-ui/core';
-import { Create, EventAvailable, ExitToApp, Home } from '@material-ui/icons';
+import { Create, ExitToApp, Home } from '@material-ui/icons';
 import Link from 'next/link';
 import * as React from 'react';
 

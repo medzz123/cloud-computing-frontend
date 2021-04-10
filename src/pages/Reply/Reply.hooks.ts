@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 export const useReply = () => {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const router = useRouter();
 
@@ -15,13 +16,18 @@ export const useReply = () => {
   useEffect(() => {
     const getEvents = async () => {
       const params = router.query;
+      setError(false);
 
-      const response = await unauthenticatedFetch({
-        url: `/get-reply?id=${params.id}&event=${params.event}&token=${params.token}`,
-      });
+      try {
+        const response = await unauthenticatedFetch({
+          url: `/get-reply?id=${params.id}&event=${params.event}&token=${params.token}`,
+        });
 
-      if (response?.data) {
-        setState(response.data);
+        if (response?.data) {
+          setState(response.data);
+        }
+      } catch {
+        setError(true);
       }
 
       setLoading(false);
@@ -32,5 +38,5 @@ export const useReply = () => {
     }
   }, [router.isReady]);
 
-  return { state, loading, handler };
+  return { state, loading, handler, error };
 };
