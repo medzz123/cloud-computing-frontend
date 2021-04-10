@@ -57,7 +57,6 @@ const Login = () => {
                 handleClose();
               } catch (e) {
                 toast.error('Something went wrong, please try again.');
-                console.log('Login failed', e);
               }
             }}
           >
@@ -112,7 +111,6 @@ const Login = () => {
                 window.location.href = '/';
               } catch (e) {
                 toast.error('Please check your credentials');
-                console.log('Login failed', e);
               }
             }}
           >

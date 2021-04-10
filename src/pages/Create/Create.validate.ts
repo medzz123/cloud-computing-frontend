@@ -48,7 +48,9 @@ export const createValidate = (values: CreateEventValues) => {
   } else {
     const splitEmails = emails.split(',').map((item) => item.trim());
 
-    if (
+    if (splitEmails.length >= 5) {
+      errors.emails = 'You can only add a maximum of 5 emails.';
+    } else if (
       !splitEmails.every((email) => {
         return !!email.match(emailRegex);
       })

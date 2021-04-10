@@ -1,11 +1,14 @@
 import FormikTextInput from '@components/FormikTextInput';
 import { authenticatedFetch } from '@lib/fetch';
 import { logout } from '@lib/logout';
-import { Button, Card, CardContent, Typography } from '@material-ui/core';
+import { sendFile } from '@lib/uploadImage';
+import { Box, Button, Card, CardContent, Typography } from '@material-ui/core';
+import { AxiosResponse } from 'axios';
 import { Form, Formik } from 'formik';
 import { NextPage } from 'next';
 import router from 'next/router';
 import React from 'react';
+import { useDropzone } from 'react-dropzone';
 import { toast } from 'react-toastify';
 
 import { CreateEventValues } from './Create.models';
@@ -14,6 +17,18 @@ import { createValidate } from './Create.validate';
 
 const Create: NextPage = () => {
   const classes = useCreateStyles();
+
+  const {
+    acceptedFiles,
+    fileRejections,
+    getRootProps,
+    getInputProps,
+  } = useDropzone({
+    accept: 'image/jpeg',
+    maxFiles: 1,
+    maxSize: 1000000,
+  });
+
   return (
     <div className={classes.root}>
       <Typography gutterBottom variant="h4" component="h1">
@@ -32,12 +47,26 @@ const Create: NextPage = () => {
           emails: '',
         }}
         onSubmit={async (values) => {
-          const body = {
-            ...values,
-            emails: values.emails.split(',').map((e) => e.trim()),
-          };
-
           try {
+            let urls: AxiosResponse<{ get: string; put: string }>;
+            if (acceptedFiles.length > 0) {
+              urls = await authenticatedFetch({
+                url: '/get-upload-urls',
+                method: 'POST',
+                body: {
+                  name: values.name,
+                },
+              });
+
+              await sendFile(acceptedFiles[0], urls.data.put);
+            }
+
+            const body = {
+              ...values,
+              emails: values.emails.split(',').map((e) => e.trim()),
+              ...(urls && { image: urls.data.get }),
+            };
+
             await authenticatedFetch({ url: '/event', method: 'POST', body });
 
             toast.success('New Event created!');
@@ -60,15 +89,30 @@ const Create: NextPage = () => {
             <Card className={classes.cardRoot}>
               <CardContent>
                 <div className={classes.dropArea}>
-                  <Typography
-                    gutterBottom
-                    variant="h4"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    Drop your image here (still fake)
-                  </Typography>
+                  <div {...getRootProps({ className: 'dropzone' })}>
+                    <input {...getInputProps()} />
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      color="textSecondary"
+                      align="center"
+                      component="p"
+                    >
+                      {acceptedFiles.length
+                        ? acceptedFiles[0]?.name
+                        : 'Drop your image here'}
+                    </Typography>
+                  </div>
                 </div>
+                <Typography
+                  gutterBottom
+                  variant="caption"
+                  color="error"
+                  component="p"
+                >
+                  {fileRejections[0]?.errors[0]?.message}
+                </Typography>
+                <Box height="5px" />
                 <FormikTextInput placeholder="Event Name" name="name" />
                 <FormikTextInput placeholder="Title" name="title" />
                 <FormikTextInput placeholder="Location" name="location" />

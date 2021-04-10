@@ -30,8 +30,6 @@ const EventCard: React.FunctionComponent<EventCardProps> = (props) => {
   const classes = useEventCardStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  console.log('GUest', guests);
-
   const handleExpandClick = () => {
     setExpanded((e) => !e);
   };
