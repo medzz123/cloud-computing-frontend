@@ -54,6 +54,7 @@ const Reply: NextPage = () => {
           start={state?.startTime}
           location={state?.location}
           name={state?.name}
+          description={state?.description}
           end={state?.end}
           customComponent={
             <div className={classes.center}>

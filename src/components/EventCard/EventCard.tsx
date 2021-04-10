@@ -1,4 +1,3 @@
-import { readableBoolean } from '@lib/readableBoolean';
 import {
   Box,
   Button,
@@ -26,6 +25,7 @@ const EventCard: React.FunctionComponent<EventCardProps> = (props) => {
     end,
     guests,
     customComponent,
+    description,
   } = props;
   const classes = useEventCardStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -42,12 +42,21 @@ const EventCard: React.FunctionComponent<EventCardProps> = (props) => {
         title="Contemplative Reptile"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h2">
+        <Typography variant="h5" component="h2">
           {title}
         </Typography>
-        <Typography gutterBottom variant="subtitle1" component="p">
+        <Typography
+          gutterBottom={true}
+          variant="body2"
+          color="textSecondary"
+          component="p"
+        >
           {name}
         </Typography>
+        <Typography gutterBottom={true} variant="body1" component="p">
+          {description}
+        </Typography>
+
         <Typography variant="body2" color="textSecondary" component="p">
           Location: {location}
         </Typography>

@@ -6,6 +6,7 @@ export interface EventCardProps {
   date: string;
   start: string;
   end: string;
+  description?: string;
   guests?: {
     email: string;
     attending: boolean;

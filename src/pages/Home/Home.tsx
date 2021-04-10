@@ -52,6 +52,7 @@ const Home: NextPage = () => {
               start={event.startTime}
               end={event.endTime}
               guests={event.attendees}
+              description={event.description}
             />
           ))}
         </div>

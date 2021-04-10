@@ -4,8 +4,6 @@ import Layout from '@components/Layout';
 import { initializeFirebase } from '@lib/firebase';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import firebase from 'firebase';
-import Cookie from 'js-cookie';
 import Head from 'next/head';
 import React from 'react';
 import { toast, ToastContainer } from 'react-toastify';
@@ -21,17 +19,6 @@ const App = ({ Component, pageProps, router }) => {
     }
 
     initializeFirebase();
-
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        /**
-         * Do nothing
-         */
-      } else {
-        Cookie.remove('token');
-        router.push('/login');
-      }
-    });
   }, []);
 
   return (

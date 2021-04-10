@@ -100,7 +100,7 @@ const Create: NextPage = () => {
                     >
                       {acceptedFiles.length
                         ? acceptedFiles[0]?.name
-                        : 'Drop your image here'}
+                        : 'Drop your image here (optional)'}
                     </Typography>
                   </div>
                 </div>
